@@ -49,6 +49,8 @@ public class App {
             } else if (command.contains("수정?") == true) {
                 int repid = Integer.parseInt(String.valueOf(command.charAt(6)));
 
+                alist.replace(repid);
+
                 System.out.println("명언(기존) : " + alist.contentlist.get(repid - 1));
                 System.out.println("명언 : ");
                 this.content = sc.nextLine().trim();

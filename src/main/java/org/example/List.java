@@ -13,7 +13,9 @@ public class List {
 
     public void listup() {
         for (int i = 0; i < idlist.size(); i++) {
-            System.out.println(idlist.get(i) + " / " + contentlist.get(i) + " / " + authorlist.get(i));
+            if (contentlist.get(i) != null) {
+                System.out.println(idlist.get(i) + " / " + authorlist.get(i) + " / " + contentlist.get(i));
+            }
         }
     }
 
@@ -28,7 +30,8 @@ public class List {
         authorlist.set(id - 1, null);
     }
 
-    public void replace(String resaying, String author) {
+    public void replace(int id) {
+
 
     }
 
