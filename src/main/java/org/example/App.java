@@ -1,44 +1,42 @@
 package org.example;
 
-import java.util.Scanner;
+import org.example.system.controller.SystemController;
+import org.example.wiseSaying.controller.WiseSayingController;
+
 
 public class App {
-    Scanner sc;
-    private int id = 0;
 
-    List alist = new List();
-
-    App(Scanner sc) {
-        this.sc = sc;
-    }
-
-    void Run() {
+    public void run() {
         System.out.println("== 명언 앱 ==");
+
+        SystemController systemController = new SystemController();
+        WiseSayingController wiseSayingController = new WiseSayingController();
+
+
         while (true) {
             System.out.println("명령) ");
-            String command = sc.nextLine();
+            String command = Container.getScanner().nextLine().trim();
 
             if (command.equals("종료") == true) {
-                System.out.println("종료합니다.");
+                systemController.exit();
                 break;
             } else if (command.equals("등록") == true) {
 
-                id++;
-                alist.listadd(id);
+                wiseSayingController.write();
 
-            } else if (command.equals("목록") == true) {
+            } else if (command.equals("목록")) {
 
-                alist.listup();
+                wiseSayingController.list();
 
-            } else if (command.contains("삭제?") == true) {
+            } else if (command.startsWith("삭제")) {
+                // 삭제로 시작하는 지 확인
+                // Rq에 삭제 명령을 해석하는 역할 부여 여기는 실행만 함
 
-                int delid = Integer.parseInt(String.valueOf(command.charAt(6)));
-                alist.listdel(delid);
+                Rq rq = new Rq(command);
+                // 입력받은 command를 그대로 Rq에 매개변수로 보내줘야함
+                System.out.println();
 
-            } else if (command.contains("수정?") == true) {
-
-                int repid = Integer.parseInt(String.valueOf(command.charAt(6)));
-                alist.listreplace(repid);
+                wiseSayingController.remove();
             }
         }
     }
