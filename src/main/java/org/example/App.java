@@ -16,27 +16,26 @@ public class App {
         while (true) {
             System.out.println("명령) ");
             String command = Container.getScanner().nextLine().trim();
+            Rq rq = new Rq(command);
+            // 입력받은 command를 그대로 Rq에 매개변수로 보내줘야함
 
-            if (command.equals("종료") == true) {
-                systemController.exit();
-                break;
-            } else if (command.equals("등록") == true) {
 
-                wiseSayingController.write();
-
-            } else if (command.equals("목록")) {
-
-                wiseSayingController.list();
-
-            } else if (command.startsWith("삭제")) {
-                // 삭제로 시작하는 지 확인
-                // Rq에 삭제 명령을 해석하는 역할 부여 여기는 실행만 함
-
-                Rq rq = new Rq(command);
-                // 입력받은 command를 그대로 Rq에 매개변수로 보내줘야함
-                System.out.println();
-
-                wiseSayingController.remove();
+            switch (rq.getActionCode()) {
+                case "종료":
+                    systemController.exit();
+                    return;
+                case "등록":
+                    wiseSayingController.write();
+                    break;
+                case "목록":
+                    wiseSayingController.list();
+                    break;
+                case "삭제":
+                    wiseSayingController.remove(rq);
+                    break;
+                case "수정":
+                    wiseSayingController.modify(rq);
+                    break;
             }
         }
     }
